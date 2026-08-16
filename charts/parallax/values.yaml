@@ -1,0 +1,83 @@
+# Default values for parallax enterprise node.
+# This is a YAML-formatted file.
+
+replicaCount: 3
+
+image:
+  repository: ghcr.io/your-org/parallax-proxy
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# Vault Integration Settings
+vault:
+  enabled: true
+  address: "http://vault.vault-system.svc.cluster.local:8200"
+  role: "parallax-prod-role"
+  secretPath: "parallax/prod"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account (e.g. for AWS IRSA)
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+podSecurityContext:
+  # Run as non-root for SOC2 / enterprise compliance
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 2000
+
+securityContext:
+  # Strict security context
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+resources:
+  # Limits are mandatory in enterprise clusters
+  limits:
+    cpu: "1"
+    memory: "1Gi"
+  requests:
+    cpu: "250m"
+    memory: "512Mi"
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+# Environment variables for non-sensitive data
+env:
+  ENVIRONMENT: "production"
+  DISABLE_VAULT: "false"
+
+# Assumes PostgreSQL and Redis are provisioned externally (e.g., RDS)
+# The actual connection strings will be fetched from Vault via hvac.

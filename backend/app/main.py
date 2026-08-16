@@ -275,3 +275,7 @@ app.include_router(onboarding.router)
 app.include_router(schemas.router)
 app.include_router(machine.router)
 app.include_router(doctor.router)
+
+from app.routers import network_handshake, network_registry
+app.include_router(network_handshake.router)
+app.include_router(network_registry.router)

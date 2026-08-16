@@ -16,18 +16,6 @@ engine = create_engine(
     echo=settings.debug,
 )
 
-from sqlalchemy import event
-from sqlite3 import Connection as SQLite3Connection
-
-@event.listens_for(engine, "connect")
-def set_sqlite_pragma(dbapi_connection, connection_record):
-    if isinstance(dbapi_connection, SQLite3Connection):
-        cursor = dbapi_connection.cursor()
-        cursor.execute("PRAGMA journal_mode=WAL")
-        cursor.execute("PRAGMA busy_timeout=5000")
-        cursor.execute("PRAGMA synchronous=NORMAL")
-        cursor.close()
-
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 

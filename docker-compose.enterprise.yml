@@ -1,0 +1,69 @@
+version: "3.8"
+
+services:
+  parallax-proxy:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: parallax_proxy
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:password@postgres:5432/parallax}
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379/0}
+      - ENVIRONMENT=production
+      # In enterprise VPC, Secrets would ideally be injected via Vault Agent Sidecar, 
+      # but here we rely on standard Docker Env variables.
+      - ADMIN_JWT_SECRET=${ADMIN_JWT_SECRET:-super-secret-key}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  parallax-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: parallax_worker
+    # Command to run Celery or equivalent background processor for LLM judging
+    command: celery -A app.worker worker --loglevel=info
+    environment:
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:password@postgres:5432/parallax}
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379/0}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: parallax_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=parallax
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: parallax_redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  pgdata:

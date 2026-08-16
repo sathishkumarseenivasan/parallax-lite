@@ -1,0 +1,11 @@
+apiVersion: v2
+name: parallax
+description: Phase 4 Enterprise Deployment for Parallax Protocol. Includes FastAPI proxy, Celery workers, and Vault integration.
+type: application
+version: 4.4.0
+appVersion: "4.4.0"
+keywords:
+  - escrow
+  - ai
+  - enterprise
+  - parallax
