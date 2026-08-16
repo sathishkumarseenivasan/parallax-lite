@@ -59,7 +59,7 @@ services:
 ```bash
 docker compose -f docker-compose.enterprise.yml up -d --build
 ```
-*Then open **[http://localhost:3000/enterprise](http://localhost:3000/enterprise)** to access the Admin Command Center.*
+*Then open **[http://localhost:3000/enterprise](http://localhost:3000/enterprise)** to access Admin Command Center.*
 
 ## MCP Integration
 
