@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: parallax-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: PARALLAX_ENV
+        value: production
+      - key: PARALLAX_MODE
+        value: network
+      - key: DATABASE_URL
+        value: sqlite:////data/parallax.db
+      - key: FRONTEND_ORIGIN
+        sync: false
+    disk:
+      name: sqlite-data
+      mountPath: /data
+      sizeGB: 1

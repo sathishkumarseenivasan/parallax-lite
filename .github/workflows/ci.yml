@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r backend/requirements.txt
+        pip install -e sdk/
+        pip install -e cli/
+
+    - name: Run Pytest
+      run: |
+        cd backend
+        pytest tests/ -v
+
+  journeys:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        pip install -r backend/requirements.txt
+        pip install -e sdk/
+        pip install -e cli/
+
+    - name: Boot local backend for journeys
+      run: |
+        cd backend
+        uvicorn app.main:app --port 8000 &
+        sleep 5
+        # seed data so tests have agents
+        cd ..
+        plx init
+        plx doctor
+        plx simulate --scenario happy_path --count 1
+
+    - name: Run Journeys
+      run: make journeys
+
+    - name: Run Docker Journey
+      run: make journey-docker

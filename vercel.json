@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/app/(.*)",
+      "destination": "/app"
+    },
+    {
+      "source": "/studio/(.*)",
+      "destination": "/studio"
+    },
+    {
+      "source": "/playground/(.*)",
+      "destination": "/playground"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "${BACKEND_URL}/api/:path*"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "parallax-sdk"
+version = "0.3.0"
+description = "Parallax Lite Python SDK - Escrow and verification for AI agent swarms."
+authors = [{ name = "Parallax Protocol", email = "hello@parallax.local" }]
+dependencies = [
+    "httpx>=0.24.0",
+    "websockets>=11.0.0",
+    "pydantic>=2.0.0",
+]
+readme = "README.md"
+requires-python = ">=3.11"
+
+[project.urls]
+"Homepage" = "https://github.com/parallax-protocol/parallax-lite"

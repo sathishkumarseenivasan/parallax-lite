@@ -1,0 +1,49 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#050505"/>
+  
+  <!-- Radial Glow -->
+  <circle cx="600" cy="0" r="400" fill="#4F46E5" fill-opacity="0.15" filter="blur(100px)"/>
+  
+  <!-- Logo -->
+  <rect x="80" y="80" width="60" height="60" rx="12" fill="url(#grad)" />
+  <text x="110" y="122" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="32" font-weight="bold" text-anchor="middle">P</text>
+  <text x="160" y="120" fill="#FAFAFA" font-family="Inter, sans-serif" font-size="32" font-weight="600">Parallax</text>
+  
+  <!-- Content -->
+  <text x="80" y="280" fill="#A1A1AA" font-family="JetBrains Mono, monospace" font-size="20" font-weight="500" letter-spacing="4">OPEN SOURCE · AGENT SETTLEMENT INFRASTRUCTURE</text>
+  <text x="80" y="380" fill="#FAFAFA" font-family="Inter, sans-serif" font-size="80" font-weight="600" letter-spacing="-2">AI agents pay each other now.</text>
+  
+  <!-- Gradient text manually with fill="url(#grad2)" -->
+  <text x="80" y="470" fill="url(#grad2)" font-family="Inter, sans-serif" font-size="80" font-weight="600" letter-spacing="-2">Someone has to check the work.</text>
+  
+  <!-- Ticker Simulation on the right side -->
+  <g transform="translate(850, 80)">
+    <rect width="280" height="180" rx="12" fill="#0B0B0D" stroke="#1F1F23" stroke-width="2"/>
+    <text x="20" y="30" fill="#4F46E5" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600">LIVE SETTLEMENT</text>
+    <path d="M20 45 L260 45" stroke="#1F1F23" stroke-width="2"/>
+    
+    <text x="20" y="75" fill="#71717A" font-family="JetBrains Mono, monospace" font-size="14">tx_a1b2</text>
+    <text x="140" y="75" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="14">CLEARED</text>
+    <text x="220" y="75" fill="#FAFAFA" font-family="JetBrains Mono, monospace" font-size="14">0.0045</text>
+    
+    <text x="20" y="115" fill="#71717A" font-family="JetBrains Mono, monospace" font-size="14">tx_c3d4</text>
+    <text x="140" y="115" fill="#FB7185" font-family="JetBrains Mono, monospace" font-size="14">REJECTED</text>
+    <text x="220" y="115" fill="#FAFAFA" font-family="JetBrains Mono, monospace" font-size="14">refund</text>
+    
+    <text x="20" y="155" fill="#71717A" font-family="JetBrains Mono, monospace" font-size="14">tx_e5f6</text>
+    <text x="140" y="155" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="14">CLEARED</text>
+    <text x="220" y="155" fill="#FAFAFA" font-family="JetBrains Mono, monospace" font-size="14">0.0120</text>
+  </g>
+  
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366F1" />
+      <stop offset="100%" stop-color="#22D3EE" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#22D3EE" />
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "parallax-cli"
+version = "0.3.0"
+description = "Parallax Protocol CLI Tool."
+authors = [{ name = "Parallax Protocol", email = "hello@parallax.local" }]
+dependencies = [
+    "httpx>=0.24.0",
+]
+readme = "README.md"
+requires-python = ">=3.11"
+
+[project.scripts]
+plx = "parallax_cli.main:main"
