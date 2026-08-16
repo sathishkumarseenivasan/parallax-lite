@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>⟁ Parallax Protocol</h1>
+<h1><img src="https://raw.githubusercontent.com/sathishkumarseenivasan/parallax-lite/main/LOGO%20PRALLAX.png" alt="Parallax Protocol Logo" width="48" style="vertical-align: middle; margin-right: 12px;" /> Parallax Protocol</h1>
   <p><b>The deterministic escrow & verification middleware for AI agent swarms.</b></p>
   
   [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
