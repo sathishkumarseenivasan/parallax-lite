@@ -1,16 +1,3 @@
-.env
-*.db
-*.db-shm
-*.db-wal
-.venv/
-venv/
-node_modules/
-.next/
-dist/
-build/
-__pycache__/
-*.pyc
-.DS_Store
-.pytest_cache/
-coverage/
-*.log
+```
+# Documentation files are source content, no need to ignore
+```
